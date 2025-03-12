@@ -76,4 +76,26 @@ public class Autocorrect {
             throw new RuntimeException(e);
         }
     }
+
+    public int lev(String typed, String dict) {
+        int[][] ed = new int[typed.length() + 1][dict.length() + 1];
+        for(int i = 0; i < typed.length(); i++) {
+            for(int j = 0; j < dict.length(); j++) {
+                if(typed.isEmpty()) {
+                    return dict.length();
+                }
+                else if(dict.isEmpty()) {
+                    return typed.length();
+                }
+                else if(ed[])
+            }
+        }
+        else if(typed.charAt(typed.length() - 1) == dict.charAt(dict.length() - 1)) {
+            return lev(typed.substring(0, typed.length() - 2), dict.substring(0, dict.length() - 2));
+        }
+        else {
+            return 1 + Math.min(ed[i-1][j], ed[i][j-1],ed[i-1][j-1]);
+        }
+    }
+
 }
