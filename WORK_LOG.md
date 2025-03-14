@@ -1,10 +1,11 @@
 Name: Sabrina Vohra
 
-| Date |      Time       |                                                                                                              Update |
-|:-----|:---------------:|--------------------------------------------------------------------------------------------------------------------:|
-| 3/5  |  2:35 - 3:00pm  |                                                                                   I started brainstorming in class. |
-| 3/6  | 12:55 - 1:45pm  |                                             I continued brainstorming in class and started writing down some ideas. |
-| 3/9  | 11:25 - 11:55am | I continued brainstorming about the structure of the program and process it should follow and wrote out some ideas. |
-| 3/12 | 11:40 - 11:55am |   I worked on my edit distance method. I am trying to figure out how to approach it using tabulation in a for-loop. |
+| Date |      Time       |                                                                                                                                                                                                                                                                           Update |
+|:-----|:---------------:|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| 3/5  |  2:35 - 3:00pm  |                                                                                                                                                                                                                                                I started brainstorming in class. |
+| 3/6  | 12:55 - 1:45pm  |                                                                                                                                                                                                          I continued brainstorming in class and started writing down some ideas. |
+| 3/9  | 11:25 - 11:55am |                                                                                                                                                              I continued brainstorming about the structure of the program and process it should follow and wrote out some ideas. |
+| 3/12 | 11:40 - 11:55am |                                                                                            I worked on my edit distance method. I am trying to figure out how to approach it using tabulation in a for-loop. I have soome small problems with using recursion versus tabulation. |
+| 3/14 |  9:05 - 9:55am  | I worked on the tabulation method for edit distance and was able to find the right words by splitting up the for-loops. I started working on sorting by edit distance and alphabetically. I am trying to find a system to sort by edit distance while not redundantly searching. |
 
 To add a new row to the table, click into a cell and then hit shift-enter.

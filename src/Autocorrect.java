@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Autocorrect
@@ -13,22 +14,7 @@ import java.io.IOException;
 public class Autocorrect {
     String[] dictionary;
     int threshold;
-
-    // Main idea:
-        //Dictionary --> candidates --> (solve for edit distance) final list in order of edit distance
-    // Process:
-    // Set threshold
-    // Is good word?
-    // Have done problem before?
-    // Make smaller by:
-            // +- 2 in word length
-            // Do k-2 strings (k grams)
-    // Check all candidates
-        // Save edit distances in Array
-    // Organize words by edit distance
-        // Organize words by alphabetical order within edit distance value
-    // Print out sorted words
-
+    ArrayList<String> matches;
 
     /**
      * Constucts an instance of the Autocorrect class.
@@ -38,6 +24,7 @@ public class Autocorrect {
     public Autocorrect(String[] words, int threshold) {
         dictionary = words;
         this.threshold = threshold;
+        matches = new ArrayList<>();
     }
 
     /**
@@ -47,7 +34,19 @@ public class Autocorrect {
      * to threshold, sorted by edit distnace, then sorted alphabetically.
      */
     public String[] runTest(String typed) {
-        return new String[0];
+        for (String s : dictionary) {
+            int current = lev(typed, s);
+            if (current <= threshold) {
+                if(current < matches.get())
+                matches.add(s);
+            }
+        }
+        String[] finalList = new String[matches.size()];
+        for(int i = 0; i < matches.size(); i++) {
+            finalList[i] = matches.get(i);
+        }
+
+        return finalList;
     }
 
 
@@ -80,22 +79,23 @@ public class Autocorrect {
     public int lev(String typed, String dict) {
         int[][] ed = new int[typed.length() + 1][dict.length() + 1];
         for(int i = 0; i < typed.length(); i++) {
-            for(int j = 0; j < dict.length(); j++) {
-                if(typed.isEmpty()) {
-                    return dict.length();
+            ed[i][0] = i;
+        }
+        for(int j = 0; j < dict.length(); j++) {
+            ed[0][j] = j;
+        }
+        for(int i = 1; i < typed.length() + 1; i++) {
+            for(int j = 1; j < dict.length() + 1; j++) {
+                if(typed.substring(i-1, i).equals(dict.substring(j - 1, j))) {
+                    ed[i][j] = ed[i - 1][j - 1];
                 }
-                else if(dict.isEmpty()) {
-                    return typed.length();
+                else {
+                    int small = Math.min(ed[i-1][j], ed[i][j-1]);
+                    ed[i][j] = Math.min(ed[i-1][j-1], small) + 1;
                 }
-                else if(ed[])
             }
         }
-        else if(typed.charAt(typed.length() - 1) == dict.charAt(dict.length() - 1)) {
-            return lev(typed.substring(0, typed.length() - 2), dict.substring(0, dict.length() - 2));
-        }
-        else {
-            return 1 + Math.min(ed[i-1][j], ed[i][j-1],ed[i-1][j-1]);
-        }
+        return ed[typed.length()][dict.length()];
     }
 
 }
