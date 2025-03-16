@@ -24,6 +24,8 @@ public class Autocorrect {
     public Autocorrect(String[] words, int threshold) {
         dictionary = words;
         this.threshold = threshold;
+        for(int i = 1; i < threshold; i++) {
+        }
         matches = new ArrayList<>();
     }
 
@@ -37,7 +39,7 @@ public class Autocorrect {
         for (String s : dictionary) {
             int current = lev(typed, s);
             if (current <= threshold) {
-                if(current < matches.get())
+
                 matches.add(s);
             }
         }
@@ -76,7 +78,7 @@ public class Autocorrect {
         }
     }
 
-    public int lev(String typed, String dict) {
+    public int lev (String typed, String dict) {
         int[][] ed = new int[typed.length() + 1][dict.length() + 1];
         for(int i = 0; i < typed.length(); i++) {
             ed[i][0] = i;
@@ -98,4 +100,33 @@ public class Autocorrect {
         return ed[typed.length()][dict.length()];
     }
 
+
+    public ArrayList<String> edsort (ArrayList<String> current, int toAddEd, String toAdd) {
+        if(toAddEd == 1) {
+            current.addFirst(toAdd);
+            return current;
+        }
+        if(current.isEmpty()) {
+            current.addFirst(toAdd);
+            return current;
+        }
+        else {
+            return edsort(current, toAddEd, toAdd);
+        }
+    }
+
+
+    public ArrayList<String> sort (ArrayList<String> current, String toAdd, int index) {
+        if(current.isEmpty()) {
+            current.add(toAdd);
+            return current;
+        }
+        if(current.get(index).compareTo(toAdd) > 0) {
+            current.add(index + 1, toAdd);
+            return  current;
+        }
+        else {
+            return sort(current, toAdd, index - 1);
+        }
+    }
 }
