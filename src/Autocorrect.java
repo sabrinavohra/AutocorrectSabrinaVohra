@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Autocorrect
@@ -15,6 +16,7 @@ public class Autocorrect {
     String[] dictionary;
     int threshold;
     ArrayList<String> matches;
+    ArrayList[] matchesSplit;
 
     /**
      * Constucts an instance of the Autocorrect class.
@@ -24,9 +26,11 @@ public class Autocorrect {
     public Autocorrect(String[] words, int threshold) {
         dictionary = words;
         this.threshold = threshold;
-        for(int i = 1; i < threshold; i++) {
-        }
         matches = new ArrayList<>();
+        matchesSplit = new ArrayList[threshold + 1];
+        for(int i = 0; i < matchesSplit.length; i++) {
+            matchesSplit[i] = new ArrayList<>();
+        }
     }
 
     /**
@@ -39,8 +43,15 @@ public class Autocorrect {
         for (String s : dictionary) {
             int current = lev(typed, s);
             if (current <= threshold) {
-
-                matches.add(s);
+                matchesSplit[current].add(s);
+                for(int i = 0; i < matchesSplit.length; i++) {
+                    Collections.sort(matchesSplit[i]);
+                }
+            }
+        }
+        for(int i = 0; i < matchesSplit.length; i++) {
+            for(int j = 0; j < matchesSplit[i].size(); j++) {
+                matches.add((String) matchesSplit[i].get(j));
             }
         }
         String[] finalList = new String[matches.size()];
@@ -104,7 +115,6 @@ public class Autocorrect {
     public ArrayList<String> edsort (ArrayList<String> current, int toAddEd, String toAdd) {
         if(toAddEd == 1) {
             current.addFirst(toAdd);
-            return current;
         }
         if(current.isEmpty()) {
             current.addFirst(toAdd);
