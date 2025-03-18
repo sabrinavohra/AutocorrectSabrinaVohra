@@ -44,8 +44,8 @@ public class Autocorrect {
             int current = lev(typed, s);
             if (current <= threshold) {
                 matchesSplit[current].add(s);
-                for(int i = 0; i < matchesSplit.length; i++) {
-                    Collections.sort(matchesSplit[i]);
+                for (ArrayList editList : matchesSplit) {
+                    Collections.sort(editList);
                 }
             }
         }
@@ -99,7 +99,7 @@ public class Autocorrect {
         }
         for(int i = 1; i < typed.length() + 1; i++) {
             for(int j = 1; j < dict.length() + 1; j++) {
-                if(typed.substring(i-1, i).equals(dict.substring(j - 1, j))) {
+                if(typed.substring(i - 1, i).equals(dict.substring(j - 1, j))) {
                     ed[i][j] = ed[i - 1][j - 1];
                 }
                 else {
