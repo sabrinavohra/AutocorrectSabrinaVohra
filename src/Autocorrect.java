@@ -42,7 +42,7 @@ public class Autocorrect {
     public String[] runTest(String typed) {
         for (String s : dictionary) {
             int current = lev(typed, s);
-            if (current <= threshold) {
+            if ((current <= threshold) && ((s.length() - threshold) < typed.length())) {
                 matchesSplit[current].add(s);
                 for (ArrayList editList : matchesSplit) {
                     Collections.sort(editList);
