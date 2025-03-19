@@ -41,6 +41,15 @@ public class Autocorrect {
      */
     public String[] runTest(String typed) {
         for (String s : dictionary) {
+            if(s.equals("en")) {
+                int current = lev(typed, s);
+                if ((current <= threshold) && ((s.length() - threshold) < typed.length())) {
+                    matchesSplit[current].add(s);
+                    for (ArrayList editList : matchesSplit) {
+                        Collections.sort(editList);
+                    }
+                }
+            }
             int current = lev(typed, s);
             if ((current <= threshold) && ((s.length() - threshold) < typed.length())) {
                 matchesSplit[current].add(s);
@@ -91,10 +100,10 @@ public class Autocorrect {
 
     public int lev (String typed, String dict) {
         int[][] ed = new int[typed.length() + 1][dict.length() + 1];
-        for(int i = 0; i < typed.length(); i++) {
+        for(int i = 0; i <= typed.length(); i++) {
             ed[i][0] = i;
         }
-        for(int j = 0; j < dict.length(); j++) {
+        for(int j = 0; j <= dict.length(); j++) {
             ed[0][j] = j;
         }
         for(int i = 1; i < typed.length() + 1; i++) {
