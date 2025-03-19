@@ -2,7 +2,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.Scanner;
 
 /**
  * Autocorrect
@@ -111,32 +113,31 @@ public class Autocorrect {
         return ed[typed.length()][dict.length()];
     }
 
-
-    public ArrayList<String> edsort (ArrayList<String> current, int toAddEd, String toAdd) {
-        if(toAddEd == 1) {
-            current.addFirst(toAdd);
-        }
-        if(current.isEmpty()) {
-            current.addFirst(toAdd);
-            return current;
-        }
-        else {
-            return edsort(current, toAddEd, toAdd);
-        }
-    }
-
-
-    public ArrayList<String> sort (ArrayList<String> current, String toAdd, int index) {
-        if(current.isEmpty()) {
-            current.add(toAdd);
-            return current;
-        }
-        if(current.get(index).compareTo(toAdd) > 0) {
-            current.add(index + 1, toAdd);
-            return  current;
-        }
-        else {
-            return sort(current, toAdd, index - 1);
+    public static void main(String[] args) {
+        String[] dict = loadDictionary("large");
+        Autocorrect a = new Autocorrect(dict, 2);
+        boolean end = false;
+        while(!end) {
+            System.out.println("Enter your word: ");
+            boolean inDict = false;
+            Scanner input = new Scanner(System.in);
+            String in = input.nextLine();
+            for (int i = 0; i < dict.length; i++) {
+                if (dict[i].equals(in)) {
+                    inDict = true;
+                    System.out.println("This word is correctly spelt!");
+                }
+            }
+            if (!inDict) {
+                String[] list = a.runTest(in);
+                if(list.length == 0) {
+                    System.out.println("There are no similar words in the dictionary.");
+                }
+                for (String s : list) {
+                    System.out.println(s);
+                }
+            }
+            System.out.println("---------");
         }
     }
 }
