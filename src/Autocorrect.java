@@ -51,6 +51,7 @@ public class Autocorrect {
                 }
             }
         }
+        // Make more efficient, cut down two for loops into one
         for(int i = 0; i < matchesSplit.length; i++) {
             for(int j = 0; j < matchesSplit[i].size(); j++) {
                 matches.add((String) matchesSplit[i].get(j));
@@ -101,6 +102,7 @@ public class Autocorrect {
         }
         for(int i = 1; i < typed.length() + 1; i++) {
             for(int j = 1; j < dict.length() + 1; j++) {
+                // Make more efficient, don't use substring()
                 if(typed.substring(i - 1, i).equals(dict.substring(j - 1, j))) {
                     ed[i][j] = ed[i - 1][j - 1];
                 }
@@ -122,6 +124,7 @@ public class Autocorrect {
             boolean inDict = false;
             Scanner input = new Scanner(System.in);
             String in = input.nextLine();
+            // Find more efficient way to search through dictionary
             for (int i = 0; i < dict.length; i++) {
                 if (dict[i].equals(in)) {
                     inDict = true;
