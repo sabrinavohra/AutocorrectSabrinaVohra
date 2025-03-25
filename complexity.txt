@@ -1,0 +1,16 @@
+Time complexity of algorithms and methods:
+
+Algorithms:
+Initializing the data structures: O(1) for each individual data structure, O(threshold) for Array of ArrayLists.
+Generating all matching candidates for a given misspelled word: O((n+m)*d) (d = number of words in dictionary)
+Evaluating an individual candidate String to find its edit distance: O(n + m)  (n and m are the lengths of the two words)
+
+Methods:
+runTest() = O(n*m)*d + O(t*m) + O(a)
+    (calls lev() for each word in dictionary compared to typed word + converting words from each individual ArrayList
+    to one ArrayList + converting words from the ArrayList to a final Array)
+lev() = O(n*m)
+    (runs through 2 given words and compares them to one another using a tabulation approach)
+main() = O(n) + O(n) + O(n*m)*d + O(t*m) + O(a) + O(a)
+    (loads the dictionary + checks if the word is already in the dictionary + does runTest() for the word (if not in dictionary)
+    runs through list one more time to print out words)

@@ -55,12 +55,11 @@ public class Autocorrect {
                 matchesSplit[current].add(s);
             }
         }
-        // Make more efficient, cut down two for loops into one
         // Sorts the ArrayLists, adds each one to one ArrayList once sorted
-        for(int i = 0; i < matchesSplit.length; i++) {
-            Collections.sort(matchesSplit[i]);
-            for(int j = 0; j < matchesSplit[i].size(); j++) {
-                matches.add((String) matchesSplit[i].get(j));
+        for (ArrayList arrayList : matchesSplit) {
+            Collections.sort(arrayList);
+            for (Object o : arrayList) {
+                matches.add((String) o);
             }
         }
         // Adds all the words in the ArrayList into an Array that will be returned
@@ -112,7 +111,6 @@ public class Autocorrect {
         // Runs through the rest of the rows and columns
         for(int i = 1; i < typed.length() + 1; i++) {
             for(int j = 1; j < dict.length() + 1; j++) {
-                // Make more efficient, don't use substring()
                 // If the heads are the same, add the value of the tails into the box in the Array
                 if(typed.substring(i - 1, i).equals(dict.substring(j - 1, j))) {
                     ed[i][j] = ed[i - 1][j - 1];
